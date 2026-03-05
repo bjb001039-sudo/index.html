@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>대포 랜덤 게임</title>
+
+<style>
+body{
+background:#8db6f5;
+font-family:sans-serif;
+text-align:center;
+margin:0;
+}
+
+h1{
+margin-top:40px;
+}
+
+#ball{
+width:140px;
+height:140px;
+border-radius:50%;
+background:#2e7d32;
+color:#ffd600;
+font-size:60px;
+display:flex;
+align-items:center;
+justify-content:center;
+margin:120px auto 20px;
+}
+
+button{
+padding:16px 40px;
+font-size:20px;
+border-radius:30px;
+border:none;
+background:#ffd600;
+cursor:pointer;
+}
+
+#history{
+position:fixed;
+right:30px;
+top:80px;
+width:200px;
+background:white;
+border:2px solid black;
+border-radius:15px;
+padding:20px;
+}
+
+li{
+list-style:none;
+margin:5px 0;
+}
+</style>
+</head>
+
+<body>
+
+<h1>랜덤 대포 게임</h1>
+
+<div id="ball">?</div>
+
+<button onclick="fire()">발사</button>
+
+<div id="history">
+<b>최근 결과</b>
+<ul id="list"></ul>
+</div>
+
+<script>
+
+const maxNumber = 8
+const history = []
+
+function fire(){
+
+const result = Math.floor(Math.random()*maxNumber)+1
+
+document.getElementById("ball").innerText = result
+
+history.unshift(result)
+
+if(history.length>6){
+history.pop()
+}
+
+updateHistory()
+}
+
+function updateHistory(){
+
+const list = document.getElementById("list")
+list.innerHTML=""
+
+history.forEach(n=>{
+const li=document.createElement("li")
+li.innerText = n+"번"
+list.appendChild(li)
+})
+
+}
+
+</script>
+
+</body>
+</html>
